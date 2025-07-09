@@ -3,12 +3,22 @@ import time
 import mediapipe as mp
 
 cap = cv2.Videocapture(0) #0 demek mevcut kamerayı kullan demek
+mpHand = mp.solutions.hands
+
+hands = mpHand.Hands()
+
 
 while True:
   success, img = cap.read() #videodaki her frame img oluyor, success ise videonun çalışma durumu True False olarak
+  imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
+  results = hands.process(imgRGB)
+  print(results.multi_hand_landmarks) # multi_hand_landmarks sayesinde elimiz kameraya girdiğinde elimizin koordinatları output olur, el kamerada yoksa output None olur
 
-  
+  if results.multi_hand_landmarks: #eğer kamerada hiç el yoksa results.multi.. ifadesi None olur bu da False olacağı için bu if bloğuna girilmez
+    for handlms in results.multi_hand_landmarks:
+    
 
   cv2.imshow("img", img)
   cv2.waitkey(1)
+
