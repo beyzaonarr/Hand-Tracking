@@ -1,0 +1,14 @@
+import cv2
+import time
+import mediapipe as mp
+
+cap = cv2.Videocapture(0) #0 demek mevcut kamerayı kullan demek
+
+while True:
+  success, img = cap.read() #videodaki her frame img oluyor, success ise videonun çalışma durumu True False olarak
+
+
+  
+
+  cv2.imshow("img", img)
+  cv2.waitkey(1)
